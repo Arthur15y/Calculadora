@@ -1,22 +1,56 @@
+<!DOCTYPE html>
 <html>
- <head>
-  <title></title>
- </head>
- <body>
-   <form   action="home.php" method="get">
- Numero 1: <input type="text" name="num1"><br>
- Numero 2: <input type="text" name="num2"><br>
- <input type="submit">
-   </form>
- 
-   <?php 
- $num1 = $_GET['num1'];
- $num2 = $_GET['num2'];
- echo "Soma:","$num1+$num2 = ",$num1+$num2, "<br />";
- echo "Subtração:","$num1-$num2 = ",$num1-$num2, "<br />";
- echo "Multiplicação:","$num1*$num2 = ",$num1*$num2, "<br />";
- echo "Divisão:","$num1/$num2 = ",$num1/$num2, "<br />";
- echo "Resto da divisão:","$num1%$num2 = ",$num1%$num2, "<br />";
-   ?>
- </body>
+<head>
+	<title>Calculadora</title>
+</head>
+<body>
+	<form method="post">
+		<label>Número 1:</label>
+		<input type="number" name="num1" required><br><br>
+		<label>Número 2:</label>
+		<input type="number" name="num2" required><br><br>
+		<label>Operação:</label>
+		<select name="operacao">
+			<option value="soma">Adição (+)</option>
+			<option value="subtracao">Subtração (-)</option>
+			<option value="multiplicacao">Multiplicação (*)</option>
+			<option value="divisao">Divisão (/)</option>
+		</select><br><br>
+		<input type="submit" value="Calcular">
+	</form>
+	<br><br>
+	<?php
+	if(isset($_POST['num1']) && isset($_POST['num2']) && isset($_POST['operacao'])) {
+		$num1 = $_POST['num1'];
+		$num2 = $_POST['num2'];
+		$operacao = $_POST['operacao'];
+
+		switch($operacao) {
+			case 'soma':
+				$resultado = $num1 + $num2;
+				echo "Resultado: $num1 + $num2 = $resultado";
+				break;
+			case 'subtracao':
+				$resultado = $num1 - $num2;
+				echo "Resultado: $num1 - $num2 = $resultado";
+				break;
+			case 'multiplicacao':
+				$resultado = $num1 * $num2;
+				echo "Resultado: $num1 * $num2 = $resultado";
+				break;
+			case 'divisao':
+				if($num2 == 0) {
+					echo "Não é possível dividir por zero.";
+				} else {
+					$resultado = $num1 / $num2;
+					echo "Resultado: $num1 / $num2 = $resultado";
+				}
+				break;
+			default:
+				echo "Operação inválida.";
+				break;
+		}
+	}
+	?>
+</body>
 </html>
