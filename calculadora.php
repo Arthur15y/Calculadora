@@ -46,9 +46,6 @@
 					echo "Resultado: $num1 / $num2 = $resultado";
 				}
 				break;
-			default:
-				echo "Operação inválida.";
-				break;
 		}
 	}
 	?>
